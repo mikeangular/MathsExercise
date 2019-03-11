@@ -1,0 +1,42 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+    <div class="container">
+      <a class="navbar-brand" [routerLink]='["/"]'>MathsExercise</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex" [ngClass]='{"show": isExpanded}'>
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/"]' i18n="First Page | the main page for this website@@SiteHome">Home</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/counter"]' i18n="Angular Example | will be deleted in the future@@SiteExample">Counter</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/fetch-data"]' i18n="@@beb346dfecb44d3d50a9062c94ccd844de9770bf">Fetch data</a>
+          </li>
+          <li class="nav-item dropdown" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/fetch-data"]' i18n="@@SiteLanguages">Language</a>
+            <div class="dropdown-content">
+              <ng-container *ngFor="let language of languageList">
+                <ng-template
+                  *ngIf="language.code===localeId ; then ShowHref; else notShowHref">
+                </ng-template>
+                <ng-template #ShowHref>
+                  <a  >{{language.label}}</a>
+                 </ng-template>
+
+                 <ng-template #notShowHref>
+                  <a  href="{{language.code}}">{{language.label}}</a>
+                 </ng-template>
+              </ng-container>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

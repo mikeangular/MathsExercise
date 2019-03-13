@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule , Routes } from '@angular/router';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './not-found/not-found.component';
+
+import 'hammerjs';
+
+import { MyFormComponent } from './my-form/my-form.component';
+import { MatInputModule, MatButtonModule, MatCardModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
+import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
+import { MyDialogComponent } from './my-dialog/my-dialog.component';
+
+// const routes: Routes = [
+//   { path: '', component: HomeComponent },
+//   { path: '**', component: NotFoundComponent }
+// ];
 
 @NgModule({
   declarations: [
@@ -23,7 +37,11 @@ import { HttpClientModule } from '@angular/common/http';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    NotFoundComponent,
+    MyFormComponent,
+    DialogDemoComponent,
+    MyDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,13 +51,20 @@ import { HttpClientModule } from '@angular/common/http';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      // { path: '**', component: NotFoundComponent },
+      { path: '**', component: NotFoundComponent },
     ]),
     TransferHttpCacheModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatCardModule
+  ],
+  entryComponents: [
+    MyDialogComponent
   ],
   providers: [ ],
   bootstrap: [AppComponent]

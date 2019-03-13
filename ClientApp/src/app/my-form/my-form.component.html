@@ -1,0 +1,25 @@
+<form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <table class="fullwidth" cellspacing="0">
+  <tr>
+    <td>
+      <mat-form-field class="fullwidth">
+        <input MatInput placeholder="First Name" id="firstname" [(ngModel)]="address.firstname" name="firstname">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="fullwidth">
+        <input MatInput placeholder="Last Name" id="lastname" [(ngModel)]="address.lastname" name="lastname">
+      </mat-form-field>
+    </td>
+  </tr>
+  </table>
+  <p>
+    <mat-form-field class="fullwidth">
+      <textarea MatInput placeholder="Address" id="address" [(ngModel)]="address.address" name="address">
+      </textarea>
+    </mat-form-field>
+  </p>
+  <p>
+    <button type="submit" mat-flat-button>Submit</button>
+  </p>
+</form>

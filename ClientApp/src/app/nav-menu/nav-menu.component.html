@@ -29,14 +29,23 @@
                  </ng-template>
 
                  <ng-template #notShowHref>
-                  <a  href="{{language.code}}">{{language.label}}</a>
-                 </ng-template>
+                  <a  href="/{{language.code}}" (click)="RequestLanguage()" id="language{{language.code}}" name="language{{language.code}}">{{language.label}}</a>
+
+                  </ng-template>
               </ng-container>
+              <a href="/{{testurl}}" (click)="testFunction()" id='testurl' >testurl</a>
+              <input MatInput placeholder="Address" id="address" [(ngModel)]="address" name="address">
+              <button mat-raised-button (click)="changeUrl()">Change Test Url</button>
+
             </div>
           </li>
 
         </ul>
       </div>
     </div>
+
   </nav>
 </header>
+
+
+

@@ -30,13 +30,20 @@
                 "glob": "favicon.ico",
                 "input": "src",
                 "output": "/"
+              },
+              {
+                "glob": "angular.js",
+                "input": "src/assets",
+                "output": "/"
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+
+            ]
           },
           "configurations": {
             "production": {
@@ -212,7 +219,7 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
+              "outputHashing": "none",
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,

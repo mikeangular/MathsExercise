@@ -2,7 +2,7 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+<p *ngIf="!exercises"><em>Loading...</em></p>
 
 <table class='table table-striped' *ngIf="forecasts">
   <thead>
@@ -19,6 +19,24 @@
       <td>{{ forecast.temperatureC }}</td>
       <td>{{ forecast.temperatureF }}</td>
       <td>{{ forecast.summary }}</td>
+    </tr>
+  </tbody>
+</table>
+<table class='table table-striped' *ngIf="exercises">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>HashValue</th>
+      <th>CreateTime</th>
+      <th>Formula</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let forecast of exercises">
+      <td>{{ forecast.id }}</td>
+      <td>{{ forecast.hashValue }}</td>
+      <td>{{ forecast.createTime }}</td>
+      <td>{{ forecast.formula }}</td>
     </tr>
   </tbody>
 </table>

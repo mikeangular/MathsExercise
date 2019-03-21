@@ -1,9 +1,9 @@
 import { LOCALE_ID, Inject, Component, ViewChild, ElementRef} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 // import { NgElement } from '@angular/elements';/
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
-import { $ } from 'protractor';
+
 
 
 @Component({
@@ -13,9 +13,8 @@ import { $ } from 'protractor';
 })
 export class NavMenuComponent {
   isExpanded = false;
-  testurl = '/en';
-  address = 'en';
-  @ViewChild('testurl') testelement: ElementRef;
+  EfterDialogClosed = false;
+  currentLang = '';
 
   languageList = [
     { code: 'en', label: 'English' },
@@ -31,28 +30,58 @@ export class NavMenuComponent {
     this.isExpanded = !this.isExpanded;
   }
 
-  RequestLanguage() {
-    const config = new MatDialogConfig();
-    config.width = '300px';
-    if (this.localeId === 'sv') {
-      config.data =  'Är du säker att byta språket? \r\n Tryck Yes att ändra språket annars tryck No.' ;
-    } else if (this.localeId === 'zh-hans') {
-      config.data =  '确定要更改语言吗? \r\n 按‘是’，更改语言；否则按‘否’。' ;
+  RequestLanguage(lang: string) {
+    console.log('RequestLanguage begin===============, lang=' + lang);
+    console.log('EfterDialogClosed = ' + this.EfterDialogClosed);
+    this.currentLang = lang;
+    console.log('200this.currentLang=' + this.currentLang);
+    if (this.EfterDialogClosed) {
+      this.EfterDialogClosed = false;
+      return true;
     } else {
-      this.localeId = 'en';
-      config.data =  'Are you sure to change the language?Press Yes to change the language otherwise press No.' ;
-    }
-    const dialogRef = this.dialog.open(MyDialogComponent, config);
-    console.log('dialog is opened');
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog is closed');
-      // console.log('Dialog closed:${result}');
-      // this.dialogResult = result;
-      if ( result === 'Confirm') {
-        this.router.navigate(['/' + this.localeId ]);
+      const config = new MatDialogConfig<Array<string>>();
+      config.width = '450px';
+      if (this.localeId === 'sv') {
+        config.data =  ['Är du säker att byta språket?', 'Tryck Ja att ändra språket annars tryck Nej.'] ;
+      } else if (this.localeId === 'zh-hans') {
+        config.data =  ['确定要更改语言吗? ', ' 按‘是’，更改语言；否则按‘否’。' ];
+      } else {
+        this.localeId = 'en';
+        config.data =  ['Are you sure to change the language?', 'Press Yes to change the language otherwise press No.'] ;
       }
-    });
-    return false;
+      const dialogRef = this.dialog.open(MyDialogComponent, config);
+      console.log('dialog is opened and this.currentLang=' + this.currentLang);
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('dialog is closed and this.currentLang=' + this.currentLang);
+        // console.log('Dialog closed:${result}');
+        // this.dialogResult = result;
+        if ( result === 'Confirm') {
+          this.EfterDialogClosed = true;
+          let anchorId = '';
+          switch (lang) {
+            // case 'en':
+            //    anchorId = 'languageEnglish';
+            //    break;
+            case 'sv':
+              anchorId = 'languageSwedish';
+              break;
+            case 'zh-hans':
+              anchorId = 'languageChinese';
+              break;
+            default:
+              anchorId = 'languageEnglish';
+
+          }
+          console.log('anchorId=' + anchorId );
+          window.document.getElementById(anchorId).click();    //  this.router.set = 'sv';
+
+
+        }
+      });
+    }
+    console.log('RequestLanguage end===============, lang=' + lang);
+    return false ;
+
 
   }
   testFunction() {
@@ -60,15 +89,19 @@ export class NavMenuComponent {
     return false;
   }
   changeUrl() {
-    this.testurl = this.address;
+    // this.testurl = this.address;
     // document.querySelector('testurl').click();
     // this.testelement.nativeElement.href = '/sv';
-    alert('changeUrl is running');
+    // alert('changeUrl is running');
+    this.EfterDialogClosed = true;
+    window.document.getElementById('languageEnglish').click();
+    // this.router.navigateByUrl('/sv');
+
 
 
   }
 
-  constructor(@Inject(LOCALE_ID) protected localeId: string, private el: ElementRef, public dialog: MatDialog, private router: Router) {
+  constructor(@Inject(LOCALE_ID) public localeId: string, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
     const now = new Date().getTime(); // 当前时间
     console.log(now + 'localeId');
     console.log(localeId);
@@ -91,4 +124,16 @@ export class NavMenuComponent {
 
   }
 
+}
+
+
+class Infor {
+  public Title: string;
+  public Content: string;
+  constructor (
+
+
+  ) {
+
+  }
 }

@@ -2,14 +2,37 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="InformationDialog" datatype="html">
+        <source>Information</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/my-dialog/my-dialog.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <note priority="1" from="description"> people can define the inforamtion below</note>
+        <note priority="1" from="meaning">Show Information </note>
+      </trans-unit>
+      <trans-unit id="DialogYesButton" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/my-dialog/my-dialog.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="DialogNoButton" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/my-dialog/my-dialog.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="SiteHome" datatype="html">
         <source>Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
-        <note priority="1" from="description">the main page for this site</note>
-        <note priority="1" from="meaning">First page</note>
+        <note priority="1" from="description"> the main page for this website</note>
+        <note priority="1" from="meaning">First Page </note>
       </trans-unit>
       <trans-unit id="SiteExample" datatype="html">
         <source>Counter</source>
@@ -17,8 +40,8 @@
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
-        <note priority="1" from="description">will delete in the future</note>
-        <note priority="1" from="meaning">.Net Example</note>
+        <note priority="1" from="description"> will be deleted in the future</note>
+        <note priority="1" from="meaning">Angular Example </note>
       </trans-unit>
       <trans-unit id="beb346dfecb44d3d50a9062c94ccd844de9770bf" datatype="html">
         <source>Fetch data</source>
@@ -26,6 +49,52 @@
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="SiteLanguages" datatype="html">
+        <source>Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Language.English" datatype="html">
+        <source>English</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <note priority="1" from="description"> This is the default language</note>
+        <note priority="1" from="meaning">English </note>
+      </trans-unit>
+      <trans-unit id="Language.Swedish" datatype="html">
+        <source>Swedish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">Swedish </note>
+      </trans-unit>
+      <trans-unit id="Language.Chinese" datatype="html">
+        <source>Chinese</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <note priority="1" from="description"> </note>
+        <note priority="1" from="meaning">Chinese </note>
       </trans-unit>
     </body>
   </file>

@@ -1,12 +1,13 @@
 <div>
-  <h2 mat-dialog-title i18n="Show Infomation | people can define the inforamtion below@@InformationDialog">Infomation</h2>
+  <h2 mat-dialog-title i18n="Show Information | people can define the inforamtion below@@InformationDialog">Information</h2>
   <hr>
-  <mat-dialog-content>
-    <strong inneHTML>{{data}}</strong>
+  <mat-dialog-content *ngFor="let str of data">
+    <strong >{{str}}</strong>
   </mat-dialog-content>
   <hr>
-  <mat-dialog-actions>
-    <button mat-raised-button (click)="onCloseConfirm()">Yes</button>
-    <button mat-raised-button (click)="onCloseCancel()">No</button>
+  <mat-dialog-actions style = "text-align: center">
+
+      <button mat-raised-button  color = "accent"   (click)="onCloseConfirm()" i18n="@@DialogYesButton">Yes</button>
+      <button mat-raised-button  color = "accent" (click)="onCloseCancel()" i18n="@@DialogNoButton">No</button>
   </mat-dialog-actions>
 </div>

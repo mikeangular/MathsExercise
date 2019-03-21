@@ -18,8 +18,44 @@
             <a class="nav-link text-dark" [routerLink]='["/fetch-data"]' i18n="@@beb346dfecb44d3d50a9062c94ccd844de9770bf">Fetch data</a>
           </li>
           <li class="nav-item dropdown" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/fetch-data"]' i18n="@@SiteLanguages">Language</a>
+            <a class="nav-link text-dark" i18n="@@SiteLanguages">Language</a>
             <div class="dropdown-content">
+
+                <input MatInput hidden placeholder="languagevlaue" id="languagevlaue" [(ngModel)]="currentLang" name="languagevlaue">
+                <input MatInput hidden placeholder="EfterDialogClosed" id="EfterDialogClosed" [(ngModel)]="EfterDialogClosed" name="EfterDialogClosed">
+                <ng-template
+                  *ngIf="'en'===localeId ; then ShowHrefEn; else notShowHrefEn">
+                </ng-template>
+                <ng-template #ShowHrefEn>
+                  <a  i18n="English | This is the default language@@Language.English">English</a>
+                </ng-template>
+                <ng-template #notShowHrefEn>
+                    <a href="/en" i18n="English | This is the default language@@Language.English" (click)="RequestLanguage('en')" id="languageEnglish">English</a>
+                </ng-template>
+
+                <ng-template
+                  *ngIf="'sv'===localeId ; then ShowHrefSv; else notShowHrefSv">
+                </ng-template>
+                <ng-template #ShowHrefSv>
+                  <a  i18n="Swedish | @@Language.Swedish">Swedish</a>
+                </ng-template>
+                <ng-template #notShowHrefSv>
+                    <a href="/sv" i18n="Swedish | @@Language.Swedish" (click)="RequestLanguage('sv')" id="languageSwedish">Swedish</a>
+                </ng-template>
+
+                <ng-template
+                  *ngIf="'zh-hans'===localeId ; then ShowHrefCn; else notShowHrefCn">
+                </ng-template>
+                <ng-template #ShowHrefCn>
+                  <a  i18n="Chinese | @@Language.Chinese">Chinese</a>
+                </ng-template>
+                <ng-template #notShowHrefCn>
+                    <a href="/zh-hans" i18n="Chinese | @@Language.Chinese" (click)="RequestLanguage('zh-hans')" id="languageChinese">Chinese</a>
+                </ng-template>
+                <button mat-raised-button (click)="changeUrl()">Change Test Url</button> -->
+
+
+                <!-- <hr>
               <ng-container *ngFor="let language of languageList">
                 <ng-template
                   *ngIf="language.code===localeId ; then ShowHref; else notShowHref">
@@ -35,7 +71,7 @@
               </ng-container>
               <a href="/{{testurl}}" (click)="testFunction()" id='testurl' >testurl</a>
               <input MatInput placeholder="Address" id="address" [(ngModel)]="address" name="address">
-              <button mat-raised-button (click)="changeUrl()">Change Test Url</button>
+              <button mat-raised-button (click)="changeUrl()">Change Test Url</button> -->
 
             </div>
           </li>

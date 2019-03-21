@@ -16,21 +16,26 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 import { HttpClientModule } from '@angular/common/http';
+
 import { NotFoundComponent } from './not-found/not-found.component';
 
-import 'hammerjs';
+// import 'hammerjs';
 
 import { MyFormComponent } from './my-form/my-form.component';
 import { MatInputModule, MatButtonModule, MatCardModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
+import { ExerciseComponent } from './exercise/exercise.component';
 
 // const routes: Routes = [
 //   { path: '', component: HomeComponent },
 //   { path: '**', component: NotFoundComponent }
 // ];
 
+// import { InjectionToken } from '@angular/core';
+
+// export const BASE_URL = new InjectionToken<string>('BASE_URL');
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +46,8 @@ import { MyDialogComponent } from './my-dialog/my-dialog.component';
     NotFoundComponent,
     MyFormComponent,
     DialogDemoComponent,
-    MyDialogComponent
+    MyDialogComponent,
+    ExerciseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -49,6 +55,9 @@ import { MyDialogComponent } from './my-dialog/my-dialog.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      // { path: 'en', component: HomeComponent, pathMatch: 'full' },
+      // { path: 'sv', component: HomeComponent, pathMatch: 'full' },
+      // { path: 'zh-hans', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: '**', component: NotFoundComponent },
@@ -66,7 +75,7 @@ import { MyDialogComponent } from './my-dialog/my-dialog.component';
   entryComponents: [
     MyDialogComponent
   ],
-  providers: [ ],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

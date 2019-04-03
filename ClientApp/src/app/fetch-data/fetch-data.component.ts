@@ -32,7 +32,8 @@ interface Exercises {
   id: number;
   hashValue: string;
   formula: string;
-  anwser: string;
+  userAnswer: string;
+  rightAnswer: string;
   createTime: Date;
   saveTime: Date;
 }

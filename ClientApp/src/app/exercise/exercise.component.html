@@ -1,0 +1,181 @@
+
+<mat-card class = "tp-card">
+  <mat-card-header>
+     <mat-card-title i18n="ExerciseSettingTitle@@ExerciseSettingTitle">Setting</mat-card-title>
+     <mat-card-subtitle i18n="ExerciseSettingSubtitle@@ExerciseSettingSubtitle">You can choose which type you want to practice</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <section class = "tp-section"><mat-label i18n="@@ChooseType">Choose the type of Arithmetic's operator:</mat-label>
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "addition"> + </mat-checkbox>
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "subtraction"> - </mat-checkbox>
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "multiplication"> * </mat-checkbox>
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "division"> / </mat-checkbox>
+    </section>
+    <mat-error *ngIf="TypeCheck()">You must choose one type at least!</mat-error>
+
+    <mat-label i18n="@@QuestionAmount">The amount of questions: </mat-label>
+    <mat-form-field appearance = "outline">
+      <mat-select placeholder = "Amount" [(value)]="amount" [(ngModel)]="amount" name = "amount"  >   <!-- [formControl] = "amount"  [errorStateMatcher]="matcher" -->
+        <mat-option value = "5">5</mat-option>
+        <mat-option value = "10">10</mat-option>
+         <mat-option value = "20">20</mat-option>
+         <mat-option value = "30">30</mat-option>
+         <mat-option value = "40">40</mat-option>
+         <mat-option value = "50">50</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+    <mat-label i18n="@@QuantityArithmetic">The quantity of Arithmetic's operator: </mat-label>
+    <mat-form-field appearance = "outline">
+      <mat-select placeholder = "quantity" [(value)]="quantityarithmetic" [(ngModel)]="quantityarithmetic" name = "quantityarithmetic"  >   <!-- [formControl] = "amount"  [errorStateMatcher]="matcher" -->
+        <mat-option value = "1">1</mat-option>
+        <mat-option value = "2">2</mat-option>
+        <mat-option value = "3">3</mat-option>
+        <mat-option value = "4">4</mat-option>
+        <mat-option value = "5">5</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-label i18n="@@ParamterMaxValue">The Maxvalue:</mat-label>
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1" disabled = true >The Answer Maxvalue</mat-radio-button>
+      <mat-radio-button value="2" checked = true >every parameter Maxvalue</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field appearance = "outline">
+        <input matInput placeholder="MaxValue" value= "{{MaxValue}}"  [(ngModel)]="MaxValue" >
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+     <button mat-raised-button (click)="onRandom()" >Get Exercises</button>
+     <button mat-raised-button (click)="onTest()" >Test</button>
+     <button mat-raised-button (click)="onSubmit()" >Submit</button>
+
+  </mat-card-actions>
+</mat-card>
+<!-- <mat-expansion-panel>
+  <mat-expansion-panel-header>
+     <mat-panel-title>
+        Setting
+     </mat-panel-title>
+     <mat-panel-description>
+        You can choose which type you want to practice
+     </mat-panel-description>
+  </mat-expansion-panel-header> -->
+    <!-- <section class = "tp-section">Choose Type:
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "addition"> + </mat-checkbox>
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "subtraction"> - </mat-checkbox>
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "multiplication"> * </mat-checkbox>
+      <mat-checkbox class = "tp-margin" [(ngModel)] = "division"> / </mat-checkbox>
+   </section> -->
+
+
+
+    <!-- <mat-radio-group class = "tp-radio-group" [(ngModel)] = "favoriteSeason">
+      <mat-radio-button class = "tp-radio-button"
+         *ngFor = "let season of seasons" [value] = "season">
+         {{season}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div class = "tp-selected-value">
+      Selected Season: {{favoriteSeason}}
+    </div> -->
+  <!-- <mat-form-field>
+     <input matInput placeholder="Age">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Age">
+ </mat-form-field>
+ <mat-form-field>
+  <input matInput placeholder="Age">
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Age">
+</mat-form-field>
+
+</mat-expansion-panel>
+<h2 class = "tp-h2">Checkbox configuration</h2>
+<section class = "tp-section">
+   <mat-checkbox class = "tp-margin" [(ngModel)] = "checked">Checked</mat-checkbox>
+   <mat-checkbox class = "tp-margin" [(ngModel)] = "indeterminate">Indeterminate</mat-checkbox>
+</section>
+<section class = "tp-section">
+   <mat-checkbox class = "tp-margin" [(ngModel)] = "disabled">Disabled</mat-checkbox>
+</section>
+<h2 class = "tp-h2">Result</h2>
+<section class = "tp-section">
+   <mat-checkbox
+      class = "tp-margin"
+      [(ngModel)] = "checked"
+      [(indeterminate)] = "indeterminate"
+      [labelPosition] = "labelPosition"
+      [disabled] = "disabled">
+      Sample Checkbox
+   </mat-checkbox>
+</section> -->
+
+  <!-- <table class='table table-striped' *ngIf="exercises">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>HashValue</th>
+        <th>CreateTime</th>
+        <th>Formula</th>
+        <th>RightAnswer</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let forecast of exercises">
+        <td>{{ forecast.id }}</td>
+        <td>{{ forecast.settingId }}</td>
+        <td>{{ forecast.createTime }}</td>
+        <td>{{ forecast.formula }}</td>
+        <td>{{ forecast.rightAnswer }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+<!-- <table class='table table-striped' *ngIf="exercises">
+  <tbody>
+    <tr *ngFor="let forecast of exercises">
+      <td> -->
+    <ng-container *ngIf="exercises">
+      <ng-container *ngFor="let forecast of exercises">
+        <br>
+        <mat-card class ="tp-card" >
+          <mat-card-header><mat-label style="font-size:large;color: fuchsia" i18n="@@ExpressNumber">Number&nbsp;</mat-label><mat-label style="font-size:large;color: fuchsia">{{forecast.index}}:</mat-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<mat-label>{{forecast.formula}} = </mat-label>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance = "outline">
+                <input matInput placeholder="Answer" value= "{{forecast.userAnswer}}"  [(ngModel)]="forecast.userAnswer" >
+            </mat-form-field>
+            <mat-icon style="color:green" *ngIf="((showAnswer) && (forecast.IsRight))">check_circle</mat-icon>
+            <mat-icon style="color:red" *ngIf="((showAnswer) && (!forecast.IsRight))">bug_report</mat-icon>
+
+            <!-- <ng-template
+              *ngIf="forecast.userAnswer.trim().length >= 0 ; then ShowHref; else notShowHref">
+            </ng-template>
+            <ng-template #ShowHref>
+                <ng-template *ngIf="forecast.IsRight ; then ShowRightSymbol; else ShowWrongSymbol">
+                </ng-template>
+                <ng-template #ShowRightSymbol>
+                  <mat-icon style="color:green">check_circle</mat-icon>
+                </ng-template>
+                <ng-template #ShowWrongSymbol>
+                  <mat-icon style="color:red">bug_report</mat-icon>
+                </ng-template>
+            </ng-template>
+            <ng-template #notShowHref>
+            </ng-template> -->
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </ng-container>
+      <!-- </td>
+
+    </tr>
+  </tbody>
+</table> -->
+
+
+

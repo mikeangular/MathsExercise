@@ -16,6 +16,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MathsExercise.DAL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace MathsExercise {
     public class Startup {
@@ -42,9 +44,9 @@ namespace MathsExercise {
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
             };//appsettings.json文件中定义的JWT Key
             });
-            Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
+            Console.WriteLine(Configuration.GetConnectionString("LocalConnection"));
             services.AddDbContext<MEDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
             
             services.AddMvc();
 
@@ -72,9 +74,19 @@ namespace MathsExercise {
             app.UseAuthentication();   //enable authentication
 
             app.UseMvc (routes => {
+                // routes.MapRoute (
+                //     name: "default",
+                //     template: "{controller}/{action=Index}/{id?}",
+                //     defaults: new { Controller="ME" } ,
+                //     constraints: new {  id = new CompositeRouteConstraint(new IRouteConstraint[] { 
+                //             new IntRouteConstraint()})
+                //             });
                 routes.MapRoute (
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    name: "exercise",
+                    template: "{controller}/{action}/{hashvalue}/{amount?}/{operation?}",
+                    defaults: new { controller = "ME", action ="GetQuestion" } , 
+                    constraints: new { hashvalue = new MaxLengthRouteConstraint(36) }
+                );    
             });
 
             app.UseSpa (spa => {

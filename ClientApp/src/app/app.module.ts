@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule , Routes } from '@angular/router';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
+
 import { HttpClientModule } from '@angular/common/http';
 
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -22,7 +23,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 // import 'hammerjs';
 
 import { MyFormComponent } from './my-form/my-form.component';
-import { MatInputModule, MatButtonModule, MatCardModule } from '@angular/material';
+import { MatExpansionModule, MatRadioModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatCardModule, MatOptionModule, MatSelectModule, MatIconModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
@@ -53,6 +54,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       // { path: 'en', component: HomeComponent, pathMatch: 'full' },
@@ -60,6 +62,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
       // { path: 'zh-hans', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'exercise', component: ExerciseComponent },
       { path: '**', component: NotFoundComponent },
     ]),
     TransferHttpCacheModule,
@@ -67,10 +70,14 @@ import { ExerciseComponent } from './exercise/exercise.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatCheckboxModule,
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatOptionModule, MatSelectModule, MatIconModule
   ],
   entryComponents: [
     MyDialogComponent

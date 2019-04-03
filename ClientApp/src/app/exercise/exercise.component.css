@@ -1,0 +1,22 @@
+.tp-card {
+  max-width: 800px;
+}
+.tp-radio-group {
+  display: block;
+  flex-direction: column;
+}
+.tp-radio-button {
+  margin: 5px;
+}
+.tp-selected-value {
+  margin: 15px 0;
+}
+.tp-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+.tp-margin {
+  margin: 0 10px;
+}

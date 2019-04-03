@@ -12,11 +12,14 @@
             <a class="nav-link text-dark" [routerLink]='["/"]' i18n="First Page | the main page for this website@@SiteHome">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/exercise"]' i18n="My Exercises">My Exercises</a>
+          </li>
+          <!-- <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/counter"]' i18n="Angular Example | will be deleted in the future@@SiteExample">Counter</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/fetch-data"]' i18n="@@beb346dfecb44d3d50a9062c94ccd844de9770bf">Fetch data</a>
-          </li>
+          </li> -->
           <li class="nav-item dropdown" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" i18n="@@SiteLanguages">Language</a>
             <div class="dropdown-content">
@@ -52,7 +55,7 @@
                 <ng-template #notShowHrefCn>
                     <a href="/zh-hans" i18n="Chinese | @@Language.Chinese" (click)="RequestLanguage('zh-hans')" id="languageChinese">Chinese</a>
                 </ng-template>
-                <button mat-raised-button (click)="changeUrl()">Change Test Url</button> -->
+                <!-- <button mat-raised-button (click)="changeUrl()">Change Test Url</button> -->
 
 
                 <!-- <hr>

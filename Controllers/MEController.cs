@@ -3,6 +3,7 @@ using MathsExercise.ViewModels;
 using MathsExercise.DAL;
 using MathsExercise.BLL;
 using MathsExercise.Maths;
+using MathsExercise.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,23 +21,26 @@ namespace MathsExercise.Controllers
     [Route("api/[controller]")]
     public class MEController
     {
-        private readonly MEDBContext _context;
+        // private readonly MEDBContext _context;
 
-        public MEController(MEDBContext context)
+        // public MEController(MEDBContext context)
+        // {
+        //     _context = context;
+        // }
+        public MEController()
         {
-            _context = context;
         }
         [HttpGet("[action]/{id?}")]
         public ReturnClass TestGet(string Id)
         {
             ReturnClass rtn= new ReturnClass();
             rtn.Message = "This is create by server and This[" + Id + " ] is received from paramter ";
-            SystemLogBLL bll= new SystemLogBLL(this._context);
-            SystemLog data = new SystemLog();
-            data.CreateTime = DateTime.Now;
-            data.Action = "Get";
-            data.Message = "TestGet was executed one time , paramater Id = [" + Id.ToString() + "]";
-            bll.Insert(data); 
+            // SystemLogBLL bll= new SystemLogBLL(this._context);
+            // SystemLog data = new SystemLog();
+            // data.CreateTime = DateTime.Now;
+            // data.Action = "Get";
+            // data.Message = "TestGet was executed one time , paramater Id = [" + Id.ToString() + "]";
+            // bll.Insert(data); 
             return rtn;
         }
 
@@ -45,12 +49,12 @@ namespace MathsExercise.Controllers
         {
             ReturnClass rtn= new ReturnClass();
             rtn.Message = "jsondata's id = " + jsondata.id.ToString() + ";  jsondata's message = " + jsondata.message + ";";
-            SystemLogBLL bll= new SystemLogBLL(this._context);
-            SystemLog data = new SystemLog();
-            data.CreateTime = DateTime.Now;
-            data.Action = "Put";
-            data.Message = "TestPut was executed one time , jsondata 's Id = [" + jsondata.id.ToString() + "]jsondata's message = [" + jsondata.message + "]";
-            bll.Insert(data); 
+            // SystemLogBLL bll= new SystemLogBLL(this._context);
+            // SystemLog data = new SystemLog();
+            // data.CreateTime = DateTime.Now;
+            // data.Action = "Put";
+            // data.Message = "TestPut was executed one time , jsondata 's Id = [" + jsondata.id.ToString() + "]jsondata's message = [" + jsondata.message + "]";
+            // bll.Insert(data); 
             return rtn;
         }
         
@@ -150,18 +154,20 @@ namespace MathsExercise.Controllers
             foreach(string item in operations){
                 setting.Operations += item;
             }
+            setting.ID = 1; // can be any value when nodb pattern
             // _context.Setting.Add(setting);
             // _context.SaveChanges();
-            SettingBll settingBll = new SettingBll(this._context);
-            if (settingBll.Insert(setting))
-            {
-                setting = settingBll.GetOne(hashvalue);
-            }else{
-                return null;
-            }
+            // SettingBll settingBll = new SettingBll(this._context);
+            // if (settingBll.Insert(setting))
+            // {
+            //     setting = settingBll.GetOne(hashvalue);
+            // }else{
+            //     return null;
+            // }
 
             #endregion 
-            MathsExercisesBll exerBll = new MathsExercisesBll(this._context);
+            
+            // MathsExercisesBll exerBll = new MathsExercisesBll(this._context);
             List<MathsExercises> Exercises = new List<MathsExercises>();
             for ( int i=0 ; i <_amount ;i++)
             {
@@ -179,12 +185,12 @@ namespace MathsExercise.Controllers
                 Exercises.Add(item);
 
             }
-            exerBll.Create(Exercises);
+            // exerBll.Create(Exercises);
 
             
-            List<MathsExercises>  result = exerBll.GetData(setting.ID);
+            // List<MathsExercises>  result = exerBll.GetData(setting.ID);
             List<VMathsExercise> rtn = new List<VMathsExercise>();
-            foreach(MathsExercises question in result )
+            foreach(MathsExercises question in Exercises )
             {
                 VMathsExercise item = new VMathsExercise();
                 item.ID = question.ID ;
@@ -202,14 +208,51 @@ namespace MathsExercise.Controllers
         public ReturnClass PutResult([FromBody]IEnumerable<VMathsExercise> listdata){
             ReturnClass rtn = new ReturnClass();
             rtn.Message ="Great!Great!";
-            MathsExercisesBll exerBll = new MathsExercisesBll(this._context);
-            if (exerBll.Update(listdata))
-            {
-                rtn.Message = "Great! You have submitted all of answers.";
+            // MathsExercisesBll exerBll = new MathsExercisesBll(this._context);
+            rtn.Message = "Great! You have submitted all of answers.";
+            string MailText = "";
+            string RightAnswer = "";
+            string WrongAnswer = "";
+            int AmountofRight = 0;
+            int AmountofWrong = 0;
+
+            try{
+                foreach(VMathsExercise item in listdata)
+                {
+                    int right =0;
+                    int user=0;
+                    try{
+                        right = System.Convert.ToInt32 (item.RightAnswer);
+                        user = System.Convert.ToInt32 (item.UserAnswer);
+                        if(user==right)
+                        {
+                            RightAnswer += item.Formula + " = " + item.RightAnswer + "\r\n";
+                            AmountofRight +=1;
+                        }
+                        else{
+                            WrongAnswer += item.Formula + " = " + item.UserAnswer + "\r\n";
+                            AmountofWrong += 1;       
+                        }
+                    }
+                    catch{
+                            WrongAnswer += item.Formula  + " = " + item.UserAnswer + ". The right answer is " + item.RightAnswer + "\r\n";  
+                            AmountofWrong +=1;     
+                    }
+                }
+                MailText += "One user userd MathsExercises to pratctice " + (AmountofWrong+AmountofRight).ToString()+ " expresses " + System.DateTime.Now.ToString() + " .\r\n";
+                MailText += "The amount of right answer is " + AmountofRight.ToString() + "\r\n";
+                MailText += "The amount of wrong answer is " + AmountofWrong.ToString() + "\r\n";
+                MailText += "\r\n";
+                
+                MailText += AmountofRight>0 ?"Right express:\r\n\r\n" + RightAnswer : "";
+                
+                MailText += AmountofWrong>0 ?"Wrong express:\r\n" + WrongAnswer:"";
+                
+                MailManagement.Send("MathsExercises", MailText);
+           }
+            catch {
             }
-            else{
-                rtn.Message = "Sorry! It happened error when the system saved the answers";
-            }
+            //rtn.Message = MailText;
             return rtn;
         }
         [HttpGet("[action]/{age?}")]
@@ -231,13 +274,13 @@ namespace MathsExercise.Controllers
                 item.SaveTime = null;
 
                 // {  HashValue = guid.ToString(),Formula = "1+2", Anwser = "", CreateTime = DateTime.Now, SaveTime = null  
-                _context.Exercises.Add(item);
+               // _context.Exercises.Add(item);
 
             
             }
-            _context.SaveChanges();
+            //_context.SaveChanges();
 
-            return _context.Exercises.Where(item => item.SettingId == SettingId).ToList();
+            return null;
             
             // return Enumerable.Range(1, 5).Select(index => new MathsExercise.Models.MathsExercises
             // {

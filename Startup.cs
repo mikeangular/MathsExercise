@@ -44,9 +44,9 @@ namespace MathsExercise {
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
             };//appsettings.json文件中定义的JWT Key
             });
-            Console.WriteLine(Configuration.GetConnectionString("LocalConnection"));
-            services.AddDbContext<MEDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
+            // Console.WriteLine(Configuration.GetConnectionString("LocalConnection"));
+            // services.AddDbContext<MEDBContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
             
             services.AddMvc();
 

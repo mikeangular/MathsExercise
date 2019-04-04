@@ -228,7 +228,7 @@ export class ExerciseComponent {
       jsondata[val].rightAnswer = this.exercises[val].rightAnswer;
       jsondata[val].formula = this.exercises[val].formula;
 
-      this.teststring += 'ID : '  + this.exercises[val].id + ' RightAnswer：' + this.exercises[val].rightAnswer.toString() + ' your answer:' + this.exercises[val].userAnswer + 'savetime:' +  '\r\n'  ;  // statements
+      // this.teststring += 'ID : '  + this.exercises[val].id + ' RightAnswer：' + this.exercises[val].rightAnswer.toString() + ' your answer:' + this.exercises[val].userAnswer + 'savetime:' +  '\r\n'  ;  // statements
     }
     this.http.put<ReturnClass>(this.baseUrl + 'api/ME/PutResult', jsondata ).subscribe(result => {
       this.teststring = result.message.toString();

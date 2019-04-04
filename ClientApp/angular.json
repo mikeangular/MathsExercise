@@ -53,7 +53,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "outputPath": "dist/browser",
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
@@ -61,7 +62,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
 			        "budgets": [{
                 "type": "initial",
                 "maximumWarning": "2mb",
@@ -115,7 +116,7 @@
               "i18nMissingTranslation": "error"
             },
             "production-en": {
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "outputPath": "dist/browser/en/",
               "sourceMap": false,
@@ -124,7 +125,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

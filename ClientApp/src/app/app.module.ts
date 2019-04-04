@@ -57,6 +57,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'index', component: HomeComponent, pathMatch: 'full' },
       // { path: 'en', component: HomeComponent, pathMatch: 'full' },
       // { path: 'sv', component: HomeComponent, pathMatch: 'full' },
       // { path: 'zh-hans', component: HomeComponent, pathMatch: 'full' },

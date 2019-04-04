@@ -34,38 +34,29 @@
         <note priority="1" from="description"> the main page for this website</note>
         <note priority="1" from="meaning">First Page </note>
       </trans-unit>
-      <trans-unit id="SiteExample" datatype="html">
-        <source>Counter</source>
+      <trans-unit id="MyExercises" datatype="html">
+        <source>My Exercises</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
           <context context-type="linenumber">15</context>
-        </context-group>
-        <note priority="1" from="description"> will be deleted in the future</note>
-        <note priority="1" from="meaning">Angular Example </note>
-      </trans-unit>
-      <trans-unit id="beb346dfecb44d3d50a9062c94ccd844de9770bf" datatype="html">
-        <source>Fetch data</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SiteLanguages" datatype="html">
         <source>Language</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Language.English" datatype="html">
         <source>English</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <note priority="1" from="description"> This is the default language</note>
         <note priority="1" from="meaning">English </note>
@@ -74,11 +65,11 @@
         <source>Swedish</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">46</context>
         </context-group>
         <note priority="1" from="description"> </note>
         <note priority="1" from="meaning">Swedish </note>
@@ -87,14 +78,65 @@
         <source>Chinese</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <note priority="1" from="description"> </note>
         <note priority="1" from="meaning">Chinese </note>
+      </trans-unit>
+      <trans-unit id="ExerciseSettingTitle" datatype="html">
+        <source>Setting</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/exercise/exercise.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">ExerciseSettingTitle</note>
+      </trans-unit>
+      <trans-unit id="ExerciseSettingSubtitle" datatype="html">
+        <source>You can choose which type you want to practice</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/exercise/exercise.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">ExerciseSettingSubtitle</note>
+      </trans-unit>
+      <trans-unit id="ChooseType" datatype="html">
+        <source>Choose the type of Arithmetic&apos;s operator:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/exercise/exercise.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="QuestionAmount" datatype="html">
+        <source>The amount of questions: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/exercise/exercise.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="QuantityArithmetic" datatype="html">
+        <source>The quantity of Arithmetic&apos;s operator: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/exercise/exercise.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ParamterMaxValue" datatype="html">
+        <source>The Maxvalue:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/exercise/exercise.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ExpressNumber" datatype="html">
+        <source>Number </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/exercise/exercise.component.html</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

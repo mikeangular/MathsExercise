@@ -14,6 +14,9 @@ using System.Text;
 
 namespace MathsExercise.Controllers
 {
+    [Route("zh-hans/api/[controller]")]
+    [Route("en/api/[controller]")]
+    [Route("sv/api/[controller]")]
     [Route("api/[controller]")]
     public class MEController
     {
@@ -23,6 +26,34 @@ namespace MathsExercise.Controllers
         {
             _context = context;
         }
+        [HttpGet("[action]/{id?}")]
+        public ReturnClass TestGet(string Id)
+        {
+            ReturnClass rtn= new ReturnClass();
+            rtn.Message = "This is create by server and This[" + Id + " ] is received from paramter ";
+            SystemLogBLL bll= new SystemLogBLL(this._context);
+            SystemLog data = new SystemLog();
+            data.CreateTime = DateTime.Now;
+            data.Action = "Get";
+            data.Message = "TestGet was executed one time , paramater Id = [" + Id.ToString() + "]";
+            bll.Insert(data); 
+            return rtn;
+        }
+
+        [HttpPut("[action]")]
+        public ReturnClass TestPut([FromBody]TestJsonClass jsondata)
+        {
+            ReturnClass rtn= new ReturnClass();
+            rtn.Message = "jsondata's id = " + jsondata.id.ToString() + ";  jsondata's message = " + jsondata.message + ";";
+            SystemLogBLL bll= new SystemLogBLL(this._context);
+            SystemLog data = new SystemLog();
+            data.CreateTime = DateTime.Now;
+            data.Action = "Put";
+            data.Message = "TestPut was executed one time , jsondata 's Id = [" + jsondata.id.ToString() + "]jsondata's message = [" + jsondata.message + "]";
+            bll.Insert(data); 
+            return rtn;
+        }
+        
         [HttpGet("[action]/{formula?}")]
         public string Test(string Formula = "((8 + 14 - 14) * 2 + 1 ) / 3"){
             //((8 + 14 - 14) * 2 + 1 ) / 3
@@ -229,5 +260,11 @@ namespace MathsExercise.Controllers
     public class ReturnClass
     {
         public string Message { get; set; }
+    }
+    public class TestJsonClass
+    {
+        public string message;
+        public int id;
+        
     }
 }

@@ -24,6 +24,7 @@ namespace MathsExercise.DAL
         // }
         public DbSet<MathsExercises> Exercises { get; set; }
         public DbSet<Setting> Setting { get; set; }
+        public DbSet<SystemLog> systemLog { get; set; }
 
     }
 }

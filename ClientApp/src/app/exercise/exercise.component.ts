@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher} from '@angular/material/core';
 import { Guid } from 'guid-typescript';
-import { HttpUrlEncodingCodec } from '@angular/common/http';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -61,7 +61,10 @@ class JsonExercises {
 interface ReturnClass {
   message: string;
 }
-
+interface JsonData {
+  id: number;
+  message: string;
+}
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
@@ -90,12 +93,62 @@ export class ExerciseComponent {
     //   this.forecasts = result;
     // }, error => console.error(error));
     this.http = Http;
+    // baseUrl += 'en/';
+    console.log('Inject baseUrl=' + baseUrl);
+    const index  = baseUrl.indexOf('/en');
+    console.log('index=' + index.toString());
+    // if ( index > 0 ) {
+    //   console.log('lang = en');
+    //   this.baseUrl = baseUrl.substr(0, index + 1);
+    // } else {
+    //   index  = baseUrl.indexOf('/sv');
+    //   if (index > 0) {
+    //     console.log('lang = sv');
+    //     this.baseUrl = baseUrl.substr(0, index + 1);
+    //   } else {
+    //     index  = baseUrl.indexOf('/zh-hans');
+    //     if (index > 0) {
+    //       console.log('lang = cn');
+
+    //       this.baseUrl = baseUrl.substr(0, index + 1);
+    //     } else {
+    //       this.baseUrl = baseUrl;
+    //     }
+    //   }
+
+
+    // }
     this.baseUrl = baseUrl;
+    console.log('After check Language');
+    console.log('this.baseUrl=' + this.baseUrl);
+    console.log('original baseUrl=' + baseUrl);
+
     // Http.get<Exercises[]>(baseUrl + 'api/ME/GetQuestion/' + Guid.create() + '/20/abcd').subscribe(result => {
     // // http.get<Exercises[]>(baseUrl + 'api/ME/GetExample').subscribe(result => {
     //     this.exercises = result;
     // }, error => console.error(error));
   }
+  onTestGet() {
+
+    this.http.get<ReturnClass>(this.baseUrl + 'en/api/ME/TestGet/' + this.MaxValue.toString() ).subscribe(result => {
+      this.teststring  = result.message;
+    }, error => console.error(error));
+  }
+  onTestOuterGet() {
+
+    this.http.get<ReturnClass>('http://localhost:8090/api/ME/TestGet/' + this.MaxValue.toString()).subscribe(result => {
+      this.teststring  = result.message;
+    }, error => console.error(error));
+  }
+  onTestPut() {
+    const jsondata: JsonData = { id: this.MaxValue, message : '*en/api this message is created by angular*' };
+
+    this.http.put<ReturnClass>(this.baseUrl + 'en/api/ME/TestPut', jsondata ).subscribe(result => {
+      this.teststring = result.message.toString();
+      // this.showAnswer = true;
+    }, error => console.error(error));
+  }
+
   onTest() {
     // this.http.get<string>(this.baseUrl + 'api/ME/Test/5').subscribe(result => {
     //   this.teststring = result;

@@ -30,7 +30,8 @@
     <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..."/>
   </Target>
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:production:i18n-ssr"/>
+    <!-- <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:production:i18n-ssr"/> internationalization compile-->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:production"/>  <!--  Nodb compile -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:i18n-ssr" Condition=" '$(BuildServerSideRenderer)' == 'true' "/>
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**"/>

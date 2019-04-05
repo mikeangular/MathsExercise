@@ -85,6 +85,8 @@ export class ExerciseComponent {
   showAnswer = false;
   private http: HttpClient;
   private baseUrl: string;
+  Radnomdisabled = false;
+  Submitdisabled = true;
 
 
   constructor(Http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
@@ -175,7 +177,9 @@ export class ExerciseComponent {
     }, error => console.error(error));
   }
   onRandom() {
-    if (this.TypeCheck() === false) {
+    if (this.TypeCheck()) {
+      this.Radnomdisabled = true;
+      this.Submitdisabled = true;
       let param: string = Guid.create() + '/' + this.amount;
       param += '/';
       if (this.addition) { param += 'a'; }
@@ -192,6 +196,8 @@ export class ExerciseComponent {
       this.http.get<Exercises[]>(this.baseUrl + 'api/ME/GetQuestion/' + param).subscribe(result => {
           this.showAnswer = false;
       //  this.http.get<Exercises[]>(this.baseUrl + 'api/ME/GetQuestion/jk').subscribe(result => {
+          this.Radnomdisabled = false;
+          this.teststring = '';
           if ( result.length === 0 ) {
             this.teststring = '0 express is created!Please try it again';
           } else {
@@ -209,12 +215,20 @@ export class ExerciseComponent {
               this.exercises[item].userAnswer = '';
 
             }
+
+            this.Submitdisabled = false;
           }
 
-      }, error => console.error(error));
+      }, error => {
+        console.error(error);
+        this.Radnomdisabled = false;
+      });
     }
   }
   onSubmit() {
+    this.Radnomdisabled = true;
+    this.Submitdisabled = true;
+
     let val: any;
     this.teststring = '';
     const jsondata: JsonExercises[] = new Array(this.exercises.length);
@@ -233,14 +247,19 @@ export class ExerciseComponent {
     this.http.put<ReturnClass>(this.baseUrl + 'api/ME/PutResult', jsondata ).subscribe(result => {
       this.teststring = result.message.toString();
       this.showAnswer = true;
-    }, error => console.error(error));
+      this.Radnomdisabled = false;
+      this.Submitdisabled = false;
+    }, error => {
+      console.error(error);
+      this.Radnomdisabled = false;
+    });
   }
   TypeCheck() {
-    if (this.addition) { return false;  }
-    if (this.subtraction) { return false;  }
-    if (this.multiplication) { return false;  }
-    if (this.division) { return false;  }
-    return true;
+    if (this.addition) { return true;  }
+    if (this.subtraction) { return true;  }
+    if (this.multiplication) { return true;  }
+    if (this.division) { return true;  }
+    return false;
     //
   }
     // amount = new FormControl('valid', [

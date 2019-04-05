@@ -11,7 +11,7 @@
       <mat-checkbox class = "tp-margin" [(ngModel)] = "multiplication"> * </mat-checkbox>
       <mat-checkbox class = "tp-margin" [(ngModel)] = "division"> / </mat-checkbox>
     </section>
-    <mat-error *ngIf="TypeCheck()">You must choose one type at least!</mat-error>
+    <mat-error *ngIf="!TypeCheck()">You must choose one type at least!</mat-error>
 
     <mat-label i18n="@@QuestionAmount">The amount of questions: </mat-label>
     <mat-form-field appearance = "outline">
@@ -45,16 +45,16 @@
     <mat-form-field appearance = "outline">
         <input matInput placeholder="MaxValue" value= "{{MaxValue}}"  [(ngModel)]="MaxValue" >
     </mat-form-field>
-    <p>{{this.teststring}}</p>
+
   </mat-card-content>
   <mat-card-actions>
-     <button mat-raised-button (click)="onRandom()" >Get Exercises</button>
+     <button mat-raised-button (click)="onRandom()" [disabled]="Radnomdisabled">Get Exercises</button>
      <!-- <button mat-raised-button (click)="onTest()" >Test</button> -->
-     <button mat-raised-button (click)="onSubmit()" >Submit</button>
+     <button mat-raised-button (click)="onSubmit()" [disabled]="Submitdisabled">Submit</button>
      <!-- <button mat-raised-button (click)="onTestGet()" >Test Get</button>
      <button mat-raised-button (click)="onTestPut()" >Test Put</button>
      <button mat-raised-button (click)="onTestOuterGet()" >Test Outer Get</button> -->
-
+     <p>{{this.teststring}}</p>
   </mat-card-actions>
 </mat-card>
 <!-- <mat-expansion-panel>

@@ -154,7 +154,7 @@ namespace MathsExercise.Controllers
             foreach(string item in operations){
                 setting.Operations += item;
             }
-            setting.ID = 1; // can be any value when nodb pattern
+            setting.ID = System.Convert.ToInt32(System.DateTime.Now.Hour.ToString()+ System.DateTime.Now.Minute.ToString()+System.DateTime.Now.Second.ToString()); // can be any value when nodb pattern
             // _context.Setting.Add(setting);
             // _context.SaveChanges();
             // SettingBll settingBll = new SettingBll(this._context);
@@ -215,12 +215,14 @@ namespace MathsExercise.Controllers
             string WrongAnswer = "";
             int AmountofRight = 0;
             int AmountofWrong = 0;
+            int KeyId = 0;
 
             try{
                 foreach(VMathsExercise item in listdata)
                 {
                     int right =0;
                     int user=0;
+                    KeyId = item.SettingId;
                     try{
                         right = System.Convert.ToInt32 (item.RightAnswer);
                         user = System.Convert.ToInt32 (item.UserAnswer);
@@ -230,7 +232,7 @@ namespace MathsExercise.Controllers
                             AmountofRight +=1;
                         }
                         else{
-                            WrongAnswer += item.Formula + " = " + item.UserAnswer + "\r\n";
+                            WrongAnswer += item.Formula + " = " + item.UserAnswer + ". The right answer is " + item.RightAnswer + "\r\n";
                             AmountofWrong += 1;       
                         }
                     }
@@ -239,16 +241,16 @@ namespace MathsExercise.Controllers
                             AmountofWrong +=1;     
                     }
                 }
-                MailText += "One user userd MathsExercises to pratctice " + (AmountofWrong+AmountofRight).ToString()+ " expresses " + System.DateTime.Now.ToString() + " .\r\n";
+                MailText += "MathsExercises was used. The amount of expresses is " + (AmountofWrong+AmountofRight).ToString()+ ". \r\nDate: " + System.DateTime.Now.ToString() + " .\r\nKey Id: " + KeyId.ToString() + "\r\n";
                 MailText += "The amount of right answer is " + AmountofRight.ToString() + "\r\n";
                 MailText += "The amount of wrong answer is " + AmountofWrong.ToString() + "\r\n";
                 MailText += "\r\n";
                 
-                MailText += AmountofRight>0 ?"Right express:\r\n\r\n" + RightAnswer : "";
+                MailText += AmountofRight>0 ?"Right express:\r\n" + RightAnswer + "\r\n" : "";
                 
                 MailText += AmountofWrong>0 ?"Wrong express:\r\n" + WrongAnswer:"";
                 
-                MailManagement.Send("MathsExercises", MailText);
+                MailManagement.Send("MathsExercises "+KeyId.ToString(), MailText);
            }
             catch {
             }
@@ -274,7 +276,7 @@ namespace MathsExercise.Controllers
                 item.SaveTime = null;
 
                 // {  HashValue = guid.ToString(),Formula = "1+2", Anwser = "", CreateTime = DateTime.Now, SaveTime = null  
-               // _context.Exercises.Add(item);
+                // _context.Exercises.Add(item);
 
             
             }

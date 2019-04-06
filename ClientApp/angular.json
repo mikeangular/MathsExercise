@@ -53,7 +53,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputPath": "dist/browser",
+              "outputPath": "dist/",
               "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,

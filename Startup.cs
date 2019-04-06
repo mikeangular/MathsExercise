@@ -98,7 +98,7 @@ namespace MathsExercise {
                 if (env.IsDevelopment())
                 {
                     spa.Options.StartupTimeout = new TimeSpan(0, 0, 20);
-                    // spa.UseAngularCliServer(npmScript: "start");  //  .Net Core and Angular work at the same time
+                    // spa.UseAngularCliServer(npmScript: "start");   //  .Net Core and Angular work at the same time
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");  // .Net Core and Angular work independently
                 }
             });

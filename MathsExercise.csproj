@@ -5,9 +5,10 @@
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
-    <EnvironmentName>Development</EnvironmentName>
+    <!-- <EnvironmentName>Development</EnvironmentName> -->
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <EnvironmentName>Production</EnvironmentName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App"/>
@@ -25,12 +26,14 @@
     <Exec Command="node --version" ContinueOnError="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
     </Exec>
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install"/>
     <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE."/>
     <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..."/>
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install"/>
+    
   </Target>
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:production:i18n-ssr"/> internationalization compile-->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:production"/>  <!--  Nodb compile -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:i18n-ssr" Condition=" '$(BuildServerSideRenderer)' == 'true' "/>
     <ItemGroup>

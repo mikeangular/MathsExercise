@@ -205,9 +205,8 @@ namespace MathsExercise.Controllers
         }
 
         [HttpPut("[action]")]
-        public ReturnClass PutResult([FromBody]IEnumerable<VMathsExercise> listdata){
+        public ReturnClass PutResult([FromBody]PutExerciseClass data){
             ReturnClass rtn = new ReturnClass();
-            rtn.Message ="Great!Great!";
             // MathsExercisesBll exerBll = new MathsExercisesBll(this._context);
             rtn.Message = "Great! You have submitted all of answers.";
             string MailText = "";
@@ -218,7 +217,7 @@ namespace MathsExercise.Controllers
             int KeyId = 0;
 
             try{
-                foreach(VMathsExercise item in listdata)
+                foreach(VMathsExercise item in data.Expresses)
                 {
                     int right =0;
                     int user=0;
@@ -241,7 +240,14 @@ namespace MathsExercise.Controllers
                             AmountofWrong +=1;     
                     }
                 }
-                MailText += "MathsExercises was used. The amount of expresses is " + (AmountofWrong+AmountofRight).ToString()+ ". \r\nDate: " + System.DateTime.Now.ToString() + " .\r\nKey Id: " + KeyId.ToString() + "\r\n";
+                MailText += "Config:\r\n";
+                MailText += "Amount:" + data.config.Amount.ToString() + "\t" ;
+                MailText += "Quantity:" + data.config.quantity.ToString() + "\r\n";
+                MailText += "operator:" + data.config.operators.ToString() + "\t maxvalue:" + data.config.maxvalue.ToString() + "\r\n" ;
+                MailText += "createtime:" + data.config.createtime.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss") + "\r\n";
+                MailText += "submittime:" + System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\r\n\r\n";
+                
+                MailText += "User submmited. The amount of expresses is " + (AmountofWrong+AmountofRight).ToString()+ ". \r\nDate: " + System.DateTime.Now.ToString() + " .\r\n";
                 MailText += "The amount of right answer is " + AmountofRight.ToString() + "\r\n";
                 MailText += "The amount of wrong answer is " + AmountofWrong.ToString() + "\r\n";
                 MailText += "\r\n";
@@ -312,4 +318,18 @@ namespace MathsExercise.Controllers
         public int id;
         
     }
+    public class PutExerciseClass
+    {
+        public ConfigClass config { get;set;}
+        public IEnumerable<VMathsExercise> Expresses { get;set;}
+    }
+    public class ConfigClass
+    {        public int Amount {get;set; }
+        public int quantity { get;set;}
+        public string operators { get; set; }
+        public int maxvalue { get;set; }
+
+        public DateTime  createtime { get;set; }
+    }
+
 }

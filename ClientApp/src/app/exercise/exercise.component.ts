@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher} from '@angular/material/core';
 import { Guid } from 'guid-typescript';
+import { config } from 'rxjs';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -56,8 +57,20 @@ class JsonExercises {
   rightAnswer: string;
   createTime: Date;
   saveTime: Date;
+}
+class PutExerciseClass {
+  config: ConfigClass;
+  expresses: JsonExercises[];
+}
+class ConfigClass {
+  amount: number;
+  quantity: number;
+  operators: string;
+  maxvalue: number;
+  createtime: Date;
 
 }
+
 interface ReturnClass {
   message: string;
 }
@@ -83,6 +96,7 @@ export class ExerciseComponent {
   MaxValue = 20;
   teststring = '';
   showAnswer = false;
+  createtime: Date ;
   private http: HttpClient;
   private baseUrl: string;
   Radnomdisabled = false;
@@ -157,16 +171,7 @@ export class ExerciseComponent {
     // }, error => console.error(error));
 
 
-    this.teststring = '';
-    this.exercises[0].userAnswer = '10';
-
-    this.teststring += '\r\nID=' + this.exercises[0].id.toString();
-    this.teststring += '\r\nsettingId=' + this.exercises[0].settingId.toString();
-    this.teststring += '\r\nformula=' + this.exercises[0].formula.toString();
-    this.teststring += '\r\nuserAnswer=' + this.exercises[0].userAnswer.toString();
-    this.teststring += '\r\ncreateTime=' + this.exercises[0].createTime.toDateString();
-    this.teststring += '\r\nrightAnswer=' + this.exercises[0].rightAnswer.toString();
-    this.teststring += '\r\nsaveTime=' + this.exercises[0].saveTime.toDateString();
+    this.teststring = (new Date()).toString();
 
 
   }
@@ -197,6 +202,7 @@ export class ExerciseComponent {
           this.showAnswer = false;
       //  this.http.get<Exercises[]>(this.baseUrl + 'api/ME/GetQuestion/jk').subscribe(result => {
           this.Radnomdisabled = false;
+          this.createtime = new Date();
           this.teststring = '';
           if ( result.length === 0 ) {
             this.teststring = '0 express is created!Please try it again';
@@ -231,16 +237,30 @@ export class ExerciseComponent {
 
     let val: any;
     this.teststring = '';
-    const jsondata: JsonExercises[] = new Array(this.exercises.length);
+    const jsondata: PutExerciseClass = new PutExerciseClass();
+
+    jsondata.expresses = new Array(this.exercises.length);
+    jsondata.config = new ConfigClass();
+    jsondata.config.createtime = this.createtime;
+    jsondata.config.maxvalue = this.MaxValue;
+    jsondata.config.amount = Number(this.amount);
+    jsondata.config.quantity = Number(this.quantityarithmetic);
+    jsondata.config.operators = '[';
+    if (this.addition) { jsondata.config.operators += '+'; }
+    if (this.subtraction) { jsondata.config.operators += '-'; }
+    if (this.multiplication) { jsondata.config.operators += '*'; }
+    if (this.division) { jsondata.config.operators += '/'; }
+    jsondata.config.operators += ']';
+
     for (val of  Object.keys(this.exercises)) {
-      jsondata[val] =  new JsonExercises();
-      jsondata[val].id = this.exercises[val].id;
-      jsondata[val].createTime = this.exercises[val].createTime;
-      jsondata[val].saveTime  = this.exercises[val].saveTime;
-      jsondata[val].settingId = this.exercises[val].settingId;
-      jsondata[val].userAnswer = this.exercises[val].userAnswer;
-      jsondata[val].rightAnswer = this.exercises[val].rightAnswer;
-      jsondata[val].formula = this.exercises[val].formula;
+      jsondata.expresses[val] =  new JsonExercises();
+      jsondata.expresses[val].id = this.exercises[val].id;
+      jsondata.expresses[val].createTime = this.exercises[val].createTime;
+      jsondata.expresses[val].saveTime  = this.exercises[val].saveTime;
+      jsondata.expresses[val].settingId = this.exercises[val].settingId;
+      jsondata.expresses[val].userAnswer = this.exercises[val].userAnswer;
+      jsondata.expresses[val].rightAnswer = this.exercises[val].rightAnswer;
+      jsondata.expresses[val].formula = this.exercises[val].formula;
 
       // this.teststring += 'ID : '  + this.exercises[val].id + ' RightAnswer：' + this.exercises[val].rightAnswer.toString() + ' your answer:' + this.exercises[val].userAnswer + 'savetime:' +  '\r\n'  ;  // statements
     }

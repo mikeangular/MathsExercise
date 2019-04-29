@@ -55,6 +55,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
+              "outputPath": "dist/",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,

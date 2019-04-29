@@ -91,9 +91,9 @@ export class ExerciseComponent {
   multiplication = true;
   division = true;
   amount = '5';
-  quantityarithmetic = '2';
+  quantityarithmetic = '3';
   MaxValueType = '2';
-  MaxValue = 20;
+  MaxValue = 50;
   teststring = '';
   showAnswer = false;
   createtime: Date ;
